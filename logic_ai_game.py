@@ -995,14 +995,15 @@ def display_puzzle():
     if len(st.session_state.selected_steps) == len(puzzle['correct_order']):
         if st.session_state.selected_steps == puzzle['correct_order']:
             st.session_state.score += 200 * st.session_state.current_level
-            st.session_state.current_level += 1
             st.session_state.selected_steps = []
             st.session_state.attempts = 0
-            st.session_state.show_explanation = True
             
-            if st.session_state.current_level > 5:
+            if st.session_state.current_level >= 5:
                 st.session_state.game_completed = True
                 st.balloons()
+            else:
+                st.session_state.current_level += 1
+                st.session_state.show_explanation = True
             
             time.sleep(1)
             st.rerun()
